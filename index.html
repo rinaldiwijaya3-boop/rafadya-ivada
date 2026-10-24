@@ -87,6 +87,48 @@
   <button id="adminLoginBtn" type="button">Login Admin</button>
 </header>
 
+<section id="adminPanel" style="display:none; max-width:900px; margin:24px auto; padding:20px; background:#fff0f6; border:1px solid #f3b6d2; border-radius:12px;">
+  <h2>Panel Admin Rafadya Ivada</h2>
+  <p>Kelola dokumen penilaian untuk kelas 1, 2, 5, dan 6.</p>
+
+  <form id="documentForm">
+    <label for="docTitle">Judul dokumen</label><br>
+    <input id="docTitle" type="text" required style="width:100%; padding:10px; margin:6px 0 12px;"><br>
+
+    <label for="docClass">Kelas</label><br>
+    <select id="docClass" required style="width:100%; padding:10px; margin:6px 0 12px;">
+      <option value="1">Kelas 1</option>
+      <option value="2">Kelas 2</option>
+      <option value="5">Kelas 5</option>
+      <option value="6">Kelas 6</option>
+    </select><br>
+
+    <label for="docCategory">Kategori</label><br>
+    <select id="docCategory" required style="width:100%; padding:10px; margin:6px 0 12px;">
+      <option value="Penilaian">Penilaian</option>
+      <option value="Soal">Soal</option>
+      <option value="Kunci Jawaban">Kunci Jawaban</option>
+      <option value="Materi">Materi</option>
+    </select><br>
+
+    <label for="docDescription">Keterangan (opsional)</label><br>
+    <textarea id="docDescription" style="width:100%; padding:10px; margin:6px 0 12px;"></textarea><br>
+
+    <label for="docFile">File dokumen (PDF)</label><br>
+    <input id="docFile" type="file" accept=".pdf,application/pdf" required style="margin:8px 0 16px;"><br>
+
+    <label>
+      <input id="docPublished" type="checkbox" checked>
+      Terbitkan agar dapat dilihat pengunjung
+    </label><br><br>
+
+    <button type="submit">Unggah Dokumen</button>
+    <button id="adminLogoutBtn" type="button">Logout Admin</button>
+  </form>
+
+  <p id="adminMessage" role="status"></p>
+</section>
+
 
   <main>
     <section class="intro">
