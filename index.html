@@ -80,10 +80,13 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>Rafadya Ivada</h1>
-    <p>Ruang Penyimpanan Dokumen Penilaian Guru</p>
-  </header>
+  
+<header>
+  <h1>Rafadya Ivada</h1>
+  <p>Ruang Penyimpanan Dokumen Penilaian Guru</p>
+  <button id="adminLoginBtn" type="button">Login Admin</button>
+</header>
+
 
   <main>
     <section class="intro">
@@ -240,6 +243,12 @@
   }
 
   loadDocuments();
+</script>
+
+<script>
+  document.getElementById("adminLoginBtn").addEventListener("click", () => {
+    alert("Tombol Login Admin sudah aktif. Autentikasi Supabase akan kita sambungkan berikutnya.");
+  });
 </script>
 
 </body>
