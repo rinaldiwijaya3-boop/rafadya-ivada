@@ -403,6 +403,7 @@ document.getElementById("adminLoginBtn").style.display = "none";
       }
 
       message.textContent = "Dokumen berhasil diunggah dan disimpan.";
+      await loadDocuments();
       uploadForm.reset();
       document.getElementById("docPublished").checked = true;
     } catch (error) {
