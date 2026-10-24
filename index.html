@@ -419,6 +419,52 @@ document.getElementById("adminLoginBtn").style.display = "none";
   });
 </script>
 
+<script>
+  async function loadAdminDocuments() {
+    const list = document.getElementById("adminDocumentList");
+    list.textContent = "Memuat daftar dokumen...";
+
+    const { data, error } = await supabaseClient
+      .from("documents")
+      .select("id, title, class_level, category, file_name, published, created_at")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      list.textContent = "Daftar gagal dimuat. Periksa izin akses dokumen.";
+      console.error(error);
+      return;
+    }
+
+    list.replaceChildren();
+
+    if (!data || data.length === 0) {
+      list.textContent = "Belum ada dokumen.";
+      return;
+    }
+
+    data.forEach((doc) => {
+      const item = document.createElement("div");
+      item.style.cssText =
+        "padding:12px; margin:10px 0; border:1px solid #ddd; border-radius:8px;";
+
+      const title = document.createElement("strong");
+      title.textContent = doc.title;
+
+      const detail = document.createElement("p");
+      detail.textContent =
+        "Kelas " + doc.class_level +
+        " | " + doc.category +
+        " | " + doc.file_name;
+
+      const status = document.createElement("p");
+      status.textContent = doc.published ? "Status: Terbit" : "Status: Draft";
+
+      item.append(title, detail, status);
+      list.appendChild(item);
+    });
+  }
+</script>
+
 </body>
 </html>
 
