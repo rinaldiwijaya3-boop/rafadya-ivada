@@ -478,12 +478,21 @@ item.append(title, detail, status, deleteBtn);
   deleteBtn.textContent = "Menghapus...";
 
   try {
-    const { error } = await supabaseClient
-      .from("documents")
-      .delete()
-      .eq("id", doc.id);
+const { error: storageError } = await supabaseClient.storage
+  .from("assessment-files")
+  .remove([doc.file_path]);
 
-    if (error) throw error;
+if (storageError) throw storageError;
+
+const { error: deleteError } = await supabaseClient
+  .from("documents")
+  .delete()
+  .eq("id", doc.id);
+
+if (deleteError) {
+  alert("File PDF sudah terhapus, tetapi catatan database gagal dihapus. Hubungi admin untuk pemeriksaan.");
+  throw deleteError;
+}
 
     alert("Dokumen berhasil dihapus dari daftar.");
     await loadAdminDocuments();
