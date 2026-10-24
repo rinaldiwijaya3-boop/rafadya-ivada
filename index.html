@@ -473,6 +473,58 @@ editBtn.style.cssText =
   "background:#0d6efd;color:white;padding:8px 12px;border:0;border-radius:6px;margin-right:8px;cursor:pointer;";
 
 item.append(title, detail, status, editBtn, deleteBtn);
+      
+editBtn.addEventListener("click", async () => {
+  const newTitle = prompt("Judul dokumen:", doc.title);
+  if (newTitle === null) return;
+
+  if (!newTitle.trim()) {
+    alert("Judul dokumen tidak boleh kosong.");
+    return;
+  }
+
+  const newClass = prompt(
+    "Masukkan kelas (1, 2, 5, atau 6):",
+    String(doc.class_level)
+  );
+  if (newClass === null) return;
+
+  if (!["1", "2", "5", "6"].includes(newClass.trim())) {
+    alert("Kelas harus 1, 2, 5, atau 6.");
+    return;
+  }
+
+  const newCategory = prompt(
+    "Kategori (Penilaian, Soal, Kunci Jawaban, atau Materi):",
+    doc.category
+  );
+  if (newCategory === null) return;
+
+  if (!["Penilaian", "Soal", "Kunci Jawaban", "Materi"].includes(newCategory.trim())) {
+    alert("Kategori tidak valid.");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("documents")
+    .update({
+      title: newTitle.trim(),
+      class_level: Number(newClass),
+      category: newCategory.trim()
+    })
+    .eq("id", doc.id);
+
+  if (error) {
+    console.error(error);
+    alert("Gagal mengedit dokumen. Periksa izin UPDATE admin.");
+    return;
+  }
+
+  alert("Dokumen berhasil diperbarui.");
+  await loadAdminDocuments();
+  await loadDocuments();
+});
+
       deleteBtn.addEventListener("click", async () => {
   const yakin = confirm(
     'Yakin ingin menghapus dokumen "' + doc.title + '"?'
