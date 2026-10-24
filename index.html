@@ -460,7 +460,13 @@ document.getElementById("adminLoginBtn").style.display = "none";
       const status = document.createElement("p");
       status.textContent = doc.published ? "Status: Terbit" : "Status: Draft";
 
-      item.append(title, detail, status);
+      const deleteBtn = document.createElement("button");
+deleteBtn.textContent = "Hapus Dokumen";
+deleteBtn.type = "button";
+deleteBtn.style.cssText =
+  "background:#dc3545;color:white;padding:8px 12px;border:0;border-radius:6px;cursor:pointer;";
+
+item.append(title, detail, status, deleteBtn);
       list.appendChild(item);
     });
   }
