@@ -77,6 +77,42 @@
       .classes { gap: 8px; }
       .intro, .panel { padding: 15px; }
     }
+  
+    /* Penyempurnaan visual responsif */
+    body { line-height: 1.6; }
+    header { padding: 42px 18px 36px; position: relative; overflow: hidden; }
+    header h1 { font-size: clamp(30px, 5vw, 44px); letter-spacing: -.8px; }
+    header p { font-size: 15px; opacity: .96; }
+    #adminLoginBtn { margin-top: 18px; border: 1px solid #ffffff80; background: #ffffff20; color: white; font-weight: 700; cursor: pointer; }
+    #adminLoginBtn:hover { background: #ffffff35; }
+    main { max-width: 1060px; padding-top: 28px; }
+    .intro, .panel { border: 1px solid #e8ebf8; box-shadow: 0 12px 34px #273d7010; }
+    .intro h2, .panel h2 { letter-spacing: -.3px; }
+    .class-btn { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .class-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px #273d7012; }
+    .class-btn.active { box-shadow: 0 0 0 3px #f3a8cb30; }
+    button, input, select, textarea { max-width: 100%; }
+    button { cursor: pointer; }
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible { outline: 3px solid #9db6ff; outline-offset: 2px; }
+    .doc { background: linear-gradient(180deg,#fff,#fcfcff); transition: border-color .18s ease, transform .18s ease; }
+    .doc:hover { border-color: #cbd5f5; transform: translateY(-1px); }
+    .doc a { display: inline-flex; margin-top: 4px; padding: 9px 13px; border-radius: 9px; background: #edf1ff; text-decoration: none; font-weight: 700; }
+    .doc a:hover { background: #e0e7ff; text-decoration: underline; }
+    #adminPanel { box-shadow: 0 12px 34px #273d7015; }
+    #documentForm label { font-weight: 700; }
+    #documentForm input:not([type="checkbox"]):not([type="file"]), #documentForm select, #documentForm textarea { width: 100%; border: 1px solid #d6dcec; border-radius: 10px; padding: 11px 12px; margin: 6px 0 14px; }
+    #documentForm textarea { min-height: 90px; resize: vertical; }
+    #documentForm button, #adminDocumentList button { border: 0; font-weight: 700; }
+    #documentForm button[type="submit"] { background: var(--blue); color: white; }
+    #adminLogoutBtn { background: #fce7ef; color: #8d2452; margin-left: 6px; }
+    footer { padding: 28px 16px; }
+    @media (max-width: 480px) {
+      header { padding: 32px 14px; }
+      .toolbar { flex-direction: column; }
+      #search, #category { width: 100%; }
+      .class-btn { min-height: 76px; padding: 10px; font-size: 14px; }
+    }
+
   </style>
 </head>
 <body>
@@ -163,9 +199,9 @@
         <select id="category" aria-label="Filter kategori">
           <option value="">Semua kategori</option>
           <option value="Penilaian">Penilaian</option>
-          <option value="Tugas">Tugas</option>
+          <option value="Soal">Soal</option>
+          <option value="Kunci Jawaban">Kunci Jawaban</option>
           <option value="Materi">Materi</option>
-          <option value="Lainnya">Lainnya</option>
         </select>
       </div>
 
@@ -290,12 +326,6 @@
   }
 
   loadDocuments();
-</script>
-
-<script>
-  document.getElementById("adminLoginBtn").addEventListener("click", () => {
-    alert("Tombol Login Admin sudah aktif. Autentikasi Supabase akan kita sambungkan berikutnya.");
-  });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
