@@ -129,30 +129,119 @@
     </footer>
   </main>
 
-  <script>
-    let selectedClass = 1;
-    document.getElementById("year").textContent = new Date().getFullYear();
+ 
+<script>
+  const SUPABASE_URL = "https://eoxdlmgkcomiidqzmuun.supabase.co";
+  const SUPABASE_KEY = sb_publishable_pVDPxtef45VNU7IevwFGQA_v04dS9Qa;
 
-    document.querySelectorAll(".class-btn").forEach(button => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".class-btn").forEach(item => {
-          item.classList.remove("active");
-        });
-        button.classList.add("active");
-        selectedClass = Number(button.dataset.class);
-        renderMessage();
+  let selectedClass = 1;
+  let allDocuments = [];
+
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+  document.querySelectorAll(".class-btn").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".class-btn").forEach(item => {
+        item.classList.remove("active");
       });
+
+      button.classList.add("active");
+      selectedClass = Number(button.dataset.class);
+      renderDocuments();
     });
+  });
 
-    document.getElementById("search").addEventListener("input", renderMessage);
-    document.getElementById("category").addEventListener("change", renderMessage);
+  document.getElementById("search").addEventListener("input", renderDocuments);
+  document.getElementById("category").addEventListener("change", renderDocuments);
 
-    function renderMessage() {
-      document.getElementById("documents").textContent =
-        "Kelas " + selectedClass +
-        ": database belum dihubungkan. Dokumen online akan muncul setelah konfigurasi selesai.";
+  async function loadDocuments() {
+    const container = document.getElementById("documents");
+    container.textContent = "Memuat dokumen...";
+
+    try {
+      const response = await fetch(
+        SUPABASE_URL +
+          "/rest/v1/documents?select=id,title,class_level,category,description,file_path,file_name,created_at&published=eq.true&order=created_at.desc",
+        {
+          headers: {
+            apikey: SUPABASE_KEY,
+            Authorization: "Bearer " + SUPABASE_KEY
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Database merespons HTTP " + response.status);
+      }
+
+      allDocuments = await response.json();
+      renderDocuments();
+    } catch (error) {
+      container.textContent =
+        "Dokumen belum dapat dimuat. Periksa konfigurasi database dan izin akses Supabase.";
+      console.error(error);
     }
-  </script>
+  }
+
+  function renderDocuments() {
+    const container = document.getElementById("documents");
+    const search = document.getElementById("search").value.toLowerCase().trim();
+    const category = document.getElementById("category").value;
+
+    const filtered = allDocuments.filter(doc =>
+      Number(doc.class_level) === selectedClass &&
+      (!search || (doc.title || "").toLowerCase().includes(search)) &&
+      (!category || doc.category === category)
+    );
+
+    container.replaceChildren();
+
+    if (filtered.length === 0) {
+      container.className = "empty";
+      container.textContent = "Belum ada dokumen untuk kelas ini.";
+      return;
+    }
+
+    container.className = "";
+
+    filtered.forEach(doc => {
+      const card = document.createElement("article");
+      card.className = "doc";
+
+      const title = document.createElement("h3");
+      title.textContent = doc.title;
+
+      const info = document.createElement("p");
+      info.className = "muted";
+      info.textContent =
+        "Kelas " + doc.class_level + " · " + (doc.category || "Penilaian");
+
+      card.append(title, info);
+
+      if (doc.description) {
+        const desc = document.createElement("p");
+        desc.textContent = doc.description;
+        card.append(desc);
+      }
+
+      const link = document.createElement("a");
+      link.href =
+        SUPABASE_URL +
+        "/storage/v1/object/public/assessment-files/" +
+        doc.file_path.split("/").map(encodeURIComponent).join("/");
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.textContent = "Lihat / Unduh Dokumen";
+      card.append(link);
+
+      container.append(card);
+    });
+  }
+
+  loadDocuments();
+</script>
+
 </body>
 </html>
 
