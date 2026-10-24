@@ -427,7 +427,7 @@ document.getElementById("adminLoginBtn").style.display = "none";
 
     const { data, error } = await supabaseClient
       .from("documents")
-      .select("id, title, class_level, category, file_name, file_path, published, created_at")
+      .select("id, title, class_level, category, description, file_name, file_path, published, created_at")
       .order("created_at", { ascending: false });
 
     if (error) {
