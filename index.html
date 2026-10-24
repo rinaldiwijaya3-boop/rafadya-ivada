@@ -251,6 +251,35 @@
   });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseClient = window.supabase.createClient(
+    "https://eoxdlmgkcomiidqzmuun.supabase.co",
+    "sb_publishable_pVDPxtef45VNU7IevwFGQA_v04dS9Qa"
+  );
+
+  document.getElementById("adminLoginBtn").addEventListener("click", async () => {
+    const email = prompt("Masukkan email admin:");
+    if (!email) return;
+
+    const password = prompt("Masukkan password admin:");
+    if (!password) return;
+
+    const { error } = await supabaseClient.auth.signInWithPassword({
+      email: email.trim(),
+      password: password
+    });
+
+    if (error) {
+      alert("Login gagal. Periksa email dan password admin.");
+      console.error(error);
+      return;
+    }
+
+    alert("Login berhasil!");
+  });
+</script>
+
 </body>
 </html>
 
