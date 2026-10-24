@@ -324,6 +324,23 @@ document.getElementById("adminLoginBtn").style.display = "none";
   });
 </script>
 
+<script>
+  document.getElementById("adminLogoutBtn").addEventListener("click", async () => {
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+      alert("Logout gagal. Silakan coba lagi.");
+      console.error(error);
+      return;
+    }
+
+    document.getElementById("adminPanel").style.display = "none";
+    document.getElementById("adminLoginBtn").style.display = "inline-block";
+
+    alert("Logout berhasil.");
+  });
+</script>
+
 </body>
 </html>
 
