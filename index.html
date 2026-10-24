@@ -467,6 +467,34 @@ deleteBtn.style.cssText =
   "background:#dc3545;color:white;padding:8px 12px;border:0;border-radius:6px;cursor:pointer;";
 
 item.append(title, detail, status, deleteBtn);
+      deleteBtn.addEventListener("click", async () => {
+  const yakin = confirm(
+    'Yakin ingin menghapus dokumen "' + doc.title + '"?'
+  );
+
+  if (!yakin) return;
+
+  deleteBtn.disabled = true;
+  deleteBtn.textContent = "Menghapus...";
+
+  try {
+    const { error } = await supabaseClient
+      .from("documents")
+      .delete()
+      .eq("id", doc.id);
+
+    if (error) throw error;
+
+    alert("Dokumen berhasil dihapus dari daftar.");
+    await loadAdminDocuments();
+    await loadDocuments();
+  } catch (error) {
+    console.error(error);
+    alert("Gagal menghapus dokumen. Periksa izin admin.");
+    deleteBtn.disabled = false;
+    deleteBtn.textContent = "Hapus Dokumen";
+  }
+});
       list.appendChild(item);
     });
   }
