@@ -162,6 +162,24 @@
     <button id="adminLogoutBtn" type="button">Logout Admin</button>
   </form>
 
+  <details id="accountSettings" style="margin:18px 0;padding:16px;background:#fff;border:1px solid #e5d9e8;border-radius:14px;">
+    <summary style="cursor:pointer;font-weight:700;color:#4267c8;">⚙️ Pengaturan Akun Admin</summary>
+    <div style="padding-top:14px;">
+      <h3 style="margin:0 0 8px;">Ganti Password</h3>
+      <p class="muted">Gunakan password baru yang kuat, minimal 8 karakter. Perubahan berlaku untuk akun admin yang sedang login.</p>
+      <form id="changePasswordForm">
+        <label for="currentPassword" style="display:block;margin-top:10px;">Password saat ini</label>
+        <input id="currentPassword" type="password" autocomplete="current-password" required style="width:100%;padding:11px;margin:6px 0 12px;border:1px solid #d6dcec;border-radius:10px;">
+        <label for="newPassword" style="display:block;">Password baru</label>
+        <input id="newPassword" type="password" autocomplete="new-password" minlength="8" required style="width:100%;padding:11px;margin:6px 0 12px;border:1px solid #d6dcec;border-radius:10px;">
+        <label for="confirmNewPassword" style="display:block;">Ulangi password baru</label>
+        <input id="confirmNewPassword" type="password" autocomplete="new-password" minlength="8" required style="width:100%;padding:11px;margin:6px 0 12px;border:1px solid #d6dcec;border-radius:10px;">
+        <button id="changePasswordBtn" type="submit" style="background:#4267c8;color:white;padding:11px 16px;border:0;border-radius:10px;font-weight:700;">Simpan Password Baru</button>
+        <p id="passwordMessage" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </details>
+
   <p id="adminMessage" role="status"></p>
   <hr>
 <h3>Daftar Dokumen Admin</h3>
@@ -361,6 +379,64 @@ document.getElementById("adminLoginBtn").style.display = "none";
 </script>
 
 <script>
+  document.getElementById("changePasswordForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const message = document.getElementById("passwordMessage");
+    const button = document.getElementById("changePasswordBtn");
+    const currentPassword = document.getElementById("currentPassword").value;
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmNewPassword").value;
+
+    message.textContent = "";
+    if (newPassword.length < 8) {
+      message.textContent = "Password baru minimal 8 karakter.";
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      message.textContent = "Konfirmasi password baru tidak sama.";
+      return;
+    }
+    if (newPassword === currentPassword) {
+      message.textContent = "Password baru harus berbeda dari password saat ini.";
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Memproses...";
+    message.textContent = "Memverifikasi password saat ini...";
+
+    try {
+      const { data: userData, error: userError } = await supabaseClient.auth.getUser();
+      if (userError || !userData?.user?.email) {
+        throw new Error("Sesi admin tidak valid. Silakan login kembali.");
+      }
+
+      const { error: verifyError } = await supabaseClient.auth.signInWithPassword({
+        email: userData.user.email,
+        password: currentPassword
+      });
+      if (verifyError) {
+        throw new Error("Password saat ini tidak cocok.");
+      }
+
+      const { error: updateError } = await supabaseClient.auth.updateUser({
+        password: newPassword
+      });
+      if (updateError) throw updateError;
+
+      document.getElementById("changePasswordForm").reset();
+      message.textContent = "Password berhasil diganti. Simpan password baru di tempat aman.";
+      message.style.color = "#18794e";
+    } catch (error) {
+      console.error(error);
+      message.textContent = error.message || "Password gagal diganti. Silakan coba kembali.";
+      message.style.color = "#b42318";
+    } finally {
+      button.disabled = false;
+      button.textContent = "Simpan Password Baru";
+    }
+  });
+
   document.getElementById("adminLogoutBtn").addEventListener("click", async () => {
     const { error } = await supabaseClient.auth.signOut();
 
