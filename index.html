@@ -1,1 +1,158 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4267c8">
+  <title>Rafadya Ivada | Ruang Penilaian</title>
+  <style>
+    :root {
+      --blue: #4267c8;
+      --pink: #f3a8cb;
+      --bg: #f4f6ff;
+      --card: #ffffff;
+      --text: #26324a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      padding: 28px 18px;
+      text-align: center;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), #846fd0, var(--pink));
+    }
+    header h1 { margin: 0 0 8px; font-size: 30px; }
+    header p { margin: 0; }
+    main { max-width: 1000px; margin: auto; padding: 22px 16px; }
+    .intro, .panel {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px #273d7010;
+    }
+    .classes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .class-btn, button, select, input {
+      font: inherit;
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .class-btn {
+      border: 2px solid #e1e6fb;
+      background: white;
+      cursor: pointer;
+      text-align: left;
+      min-height: 80px;
+    }
+    .class-btn strong { display: block; color: var(--blue); font-size: 18px; }
+    .class-btn.active { border-color: var(--pink); background: #fff1f8; }
+    .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin: 15px 0; }
+    input, select { border: 1px solid #d6dcec; background: white; min-width: 0; }
+    #search { flex: 1; }
+    .doc {
+      border: 1px solid #e7eaf4;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 10px;
+      overflow-wrap: anywhere;
+    }
+    .doc h3 { margin: 0 0 8px; }
+    .muted { color: #667085; font-size: 14px; }
+    a { color: var(--blue); }
+    .empty { text-align: center; padding: 22px; color: #667085; }
+    footer { text-align: center; padding: 20px; color: #667085; font-size: 13px; }
+    @media (max-width: 480px) {
+      header h1 { font-size: 25px; }
+      main { padding: 14px 10px; }
+      .classes { gap: 8px; }
+      .intro, .panel { padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Rafadya Ivada</h1>
+    <p>Ruang Penyimpanan Dokumen Penilaian Guru</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h2>Selamat Datang 👋</h2>
+      <p>Temukan dan unduh dokumen penilaian berdasarkan kelas.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Pilih Kelas</h2>
+      <div class="classes">
+        <button class="class-btn active" data-class="1">
+          <strong>Kelas 1</strong>Dokumen penilaian SD
+        </button>
+        <button class="class-btn" data-class="2">
+          <strong>Kelas 2</strong>Dokumen penilaian SD
+        </button>
+        <button class="class-btn" data-class="5">
+          <strong>Kelas 5</strong>Dokumen penilaian SD
+        </button>
+        <button class="class-btn" data-class="6">
+          <strong>Kelas 6</strong>Dokumen penilaian SD
+        </button>
+      </div>
+
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Cari nama dokumen..." aria-label="Cari dokumen">
+        <select id="category" aria-label="Filter kategori">
+          <option value="">Semua kategori</option>
+          <option value="Penilaian">Penilaian</option>
+          <option value="Tugas">Tugas</option>
+          <option value="Materi">Materi</option>
+          <option value="Lainnya">Lainnya</option>
+        </select>
+      </div>
+
+      <div id="documents" class="empty">
+        Dokumen akan ditampilkan setelah database dihubungkan.
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Rafadya Ivada · Ruang Penilaian SD
+    </footer>
+  </main>
+
+  <script>
+    let selectedClass = 1;
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.querySelectorAll(".class-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".class-btn").forEach(item => {
+          item.classList.remove("active");
+        });
+        button.classList.add("active");
+        selectedClass = Number(button.dataset.class);
+        renderMessage();
+      });
+    });
+
+    document.getElementById("search").addEventListener("input", renderMessage);
+    document.getElementById("category").addEventListener("change", renderMessage);
+
+    function renderMessage() {
+      document.getElementById("documents").textContent =
+        "Kelas " + selectedClass +
+        ": database belum dihubungkan. Dokumen online akan muncul setelah konfigurasi selesai.";
+    }
+  </script>
+</body>
+</html>
+
