@@ -341,6 +341,78 @@ document.getElementById("adminLoginBtn").style.display = "none";
   });
 </script>
 
+<script>
+  const uploadForm = document.getElementById("documentForm");
+
+  uploadForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const message = document.getElementById("adminMessage");
+    const title = document.getElementById("docTitle").value.trim();
+    const classLevel = Number(document.getElementById("docClass").value);
+    const category = document.getElementById("docCategory").value;
+    const description = document.getElementById("docDescription").value.trim();
+    const file = document.getElementById("docFile").files[0];
+    const published = document.getElementById("docPublished").checked;
+
+    if (!file || file.type !== "application/pdf") {
+      message.textContent = "Pilih file PDF yang valid.";
+      return;
+    }
+
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    const session = sessionData?.session;
+
+    if (!session) {
+      message.textContent = "Sesi admin tidak ditemukan. Silakan login kembali.";
+      return;
+    }
+
+    message.textContent = "Sedang mengunggah PDF...";
+
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+    const filePath = crypto.randomUUID() + "-" + safeName;
+
+    try {
+      const { error: uploadError } = await supabaseClient.storage
+        .from("assessment-files")
+        .upload(filePath, file, {
+          contentType: "application/pdf",
+          upsert: false
+        });
+
+      if (uploadError) throw uploadError;
+
+      const { error: insertError } = await supabaseClient
+        .from("documents")
+        .insert({
+          title: title,
+          class_level: classLevel,
+          category: category,
+          description: description || null,
+          file_path: filePath,
+          file_name: file.name,
+          published: published
+        });
+
+      if (insertError) {
+        await supabaseClient.storage
+          .from("assessment-files")
+          .remove([filePath]);
+        throw insertError;
+      }
+
+      message.textContent = "Dokumen berhasil diunggah dan disimpan.";
+      uploadForm.reset();
+      document.getElementById("docPublished").checked = true;
+    } catch (error) {
+      console.error(error);
+      message.textContent =
+        "Unggah gagal. Periksa izin Storage dan kebijakan INSERT tabel documents.";
+    }
+  });
+</script>
+
 </body>
 </html>
 
