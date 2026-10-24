@@ -7,120 +7,23 @@
   <meta name="theme-color" content="#4267c8">
   <title>Rafadya Ivada | Ruang Penilaian</title>
   <style>
-    :root {
-      --blue: #4267c8;
-      --pink: #f3a8cb;
-      --bg: #f4f6ff;
-      --card: #ffffff;
-      --text: #26324a;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-    header {
-      padding: 28px 18px;
-      text-align: center;
-      color: white;
-      background: linear-gradient(135deg, var(--blue), #846fd0, var(--pink));
-    }
-    header h1 { margin: 0 0 8px; font-size: 30px; }
-    header p { margin: 0; }
-    main { max-width: 1000px; margin: auto; padding: 22px 16px; }
-    .intro, .panel {
-      background: var(--card);
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 20px #273d7010;
-    }
-    .classes {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .class-btn, button, select, input {
-      font: inherit;
-      border-radius: 10px;
-      padding: 12px;
-    }
-    .class-btn {
-      border: 2px solid #e1e6fb;
-      background: white;
-      cursor: pointer;
-      text-align: left;
-      min-height: 80px;
-    }
-    .class-btn strong { display: block; color: var(--blue); font-size: 18px; }
-    .class-btn.active { border-color: var(--pink); background: #fff1f8; }
-    .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin: 15px 0; }
-    input, select { border: 1px solid #d6dcec; background: white; min-width: 0; }
-    #search { flex: 1; }
-    .doc {
-      border: 1px solid #e7eaf4;
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 10px;
-      overflow-wrap: anywhere;
-    }
-    .doc h3 { margin: 0 0 8px; }
-    .muted { color: #667085; font-size: 14px; }
-    a { color: var(--blue); }
-    .empty { text-align: center; padding: 22px; color: #667085; }
-    footer { text-align: center; padding: 20px; color: #667085; font-size: 13px; }
-    @media (max-width: 480px) {
-      header h1 { font-size: 25px; }
-      main { padding: 14px 10px; }
-      .classes { gap: 8px; }
-      .intro, .panel { padding: 15px; }
-    }
-  
-    /* Penyempurnaan visual responsif */
-    body { line-height: 1.6; }
-    header { padding: 42px 18px 36px; position: relative; overflow: hidden; }
-    header h1 { font-size: clamp(30px, 5vw, 44px); letter-spacing: -.8px; }
-    header p { font-size: 15px; opacity: .96; }
-    #adminLoginBtn { margin-top: 18px; border: 1px solid #ffffff80; background: #ffffff20; color: white; font-weight: 700; cursor: pointer; }
-    #adminLoginBtn:hover { background: #ffffff35; }
-    main { max-width: 1060px; padding-top: 28px; }
-    .intro, .panel { border: 1px solid #e8ebf8; box-shadow: 0 12px 34px #273d7010; }
-    .intro h2, .panel h2 { letter-spacing: -.3px; }
-    .class-btn { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
-    .class-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px #273d7012; }
-    .class-btn.active { box-shadow: 0 0 0 3px #f3a8cb30; }
-    button, input, select, textarea { max-width: 100%; }
-    button { cursor: pointer; }
-    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible { outline: 3px solid #9db6ff; outline-offset: 2px; }
-    .doc { background: linear-gradient(180deg,#fff,#fcfcff); transition: border-color .18s ease, transform .18s ease; }
-    .doc:hover { border-color: #cbd5f5; transform: translateY(-1px); }
-    .doc a { display: inline-flex; margin-top: 4px; padding: 9px 13px; border-radius: 9px; background: #edf1ff; text-decoration: none; font-weight: 700; }
-    .doc a:hover { background: #e0e7ff; text-decoration: underline; }
-    #adminPanel { box-shadow: 0 12px 34px #273d7015; }
-    #documentForm label { font-weight: 700; }
-    #documentForm input:not([type="checkbox"]):not([type="file"]), #documentForm select, #documentForm textarea { width: 100%; border: 1px solid #d6dcec; border-radius: 10px; padding: 11px 12px; margin: 6px 0 14px; }
-    #documentForm textarea { min-height: 90px; resize: vertical; }
-    #documentForm button, #adminDocumentList button { border: 0; font-weight: 700; }
-    #documentForm button[type="submit"] { background: var(--blue); color: white; }
-    #adminLogoutBtn { background: #fce7ef; color: #8d2452; margin-left: 6px; }
-    footer { padding: 28px 16px; }
-    @media (max-width: 480px) {
-      header { padding: 32px 14px; }
-      .toolbar { flex-direction: column; }
-      #search, #category { width: 100%; }
-      .class-btn { min-height: 76px; padding: 10px; font-size: 14px; }
-    }
-
-  </style>
+:root{--blue:#3267e9;--pink:#f16ba8;--bg:#f3f6ff;--ink:#202b46;--muted:#71809d;--card:rgba(255,255,255,.94);--line:#e7ebf8;--green:#12a989;--orange:#f59e0b;--purple:#8b5cf6}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}body:before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 5% 5%,#d9e6ff 0,transparent 32%),radial-gradient(circle at 95% 15%,#ffe0ef 0,transparent 30%),linear-gradient(135deg,var(--bg),#fff 75%)}
+header{padding:16px max(20px,calc((100% - 1280px)/2));display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:#ffffffd9;border-bottom:1px solid #e6ebf7;backdrop-filter:blur(12px)}.brand{display:flex;align-items:center;gap:12px}.brand-logo{width:46px;height:46px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(135deg,var(--blue),var(--pink));color:white;font-size:24px;box-shadow:0 8px 20px #3267e933}.brand h1{font-size:20px;margin:0;letter-spacing:-.4px}.brand p{font-size:12px;color:var(--muted);margin:0}.header-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.nav-label{padding:9px 12px;color:#566784;font-size:13px;font-weight:700}.btn{border:0;border-radius:12px;padding:11px 15px;font-weight:750;cursor:pointer;transition:.18s}.btn:hover{transform:translateY(-1px)}.primary{color:white;background:linear-gradient(100deg,var(--blue),#6686f5);box-shadow:0 7px 16px #3267e92b}.pink{background:linear-gradient(100deg,var(--pink),#f79ac3);color:white}.soft{background:#fff;color:#43516e;border:1px solid #e6eafa}
+main{max-width:1280px;margin:auto;padding:18px 20px 40px}.intro{background:linear-gradient(115deg,#2f65e8f5,#647ef0f2 58%,#ec75adf2);color:#fff;border-radius:25px;padding:32px;display:grid;grid-template-columns:1.4fr .8fr;gap:22px;box-shadow:0 18px 40px #496de52b;overflow:hidden;position:relative;margin-bottom:18px}.intro:after{content:"✦";position:absolute;right:7%;top:-48px;font-size:190px;color:#ffffff20}.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:800;opacity:.85}.intro h2{font-size:clamp(28px,4vw,42px);line-height:1.13;margin:10px 0}.intro p{max-width:590px;line-height:1.7;color:#f1f4ff;margin:0 0 18px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.hero-stat{align-self:center;justify-self:end;background:#ffffff20;border:1px solid #ffffff40;border-radius:20px;padding:20px 24px;min-width:190px;backdrop-filter:blur(8px);z-index:1}.hero-stat small{opacity:.85}.hero-stat strong{display:block;font-size:42px;margin:4px 0}.hero-stat span{font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:18px 0}.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:19px;box-shadow:0 8px 24px #2d4c8910}.stat{padding:16px;display:flex;align-items:center;gap:12px}.stat-ico{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;font-size:20px;background:#eaf0ff;flex-shrink:0}.stat:nth-child(2) .stat-ico{background:#ffeaf3}.stat:nth-child(3) .stat-ico{background:#e5fbf4}.stat:nth-child(4) .stat-ico{background:#fff3dc}.stat strong{font-size:25px;display:block;line-height:1.2}.stat span{color:#77829a;font-size:12px}
+.content-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:17px;align-items:start}.panel{padding:20px}.panel h2{margin:0 0 4px;font-size:21px}.sub{font-size:12px;color:#7c879f;margin:0 0 16px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.toolbar input,.toolbar select{font:inherit;border:1px solid #e0e6f4;border-radius:12px;padding:12px 14px;background:#fff;outline:none}.toolbar input:focus,.toolbar select:focus,input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #3267e91a}#search{flex:1;min-width:210px}#category{min-width:180px}.classes{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.class-btn{padding:10px 15px;border-radius:12px;background:#f6f8ff;border:1px solid #e5eafa;color:#64708a;cursor:pointer;font-weight:700;min-height:auto;text-align:center;transition:.18s}.class-btn strong{font-size:inherit;color:inherit;display:inline}.class-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 7px 16px #3267e925}.class-btn:hover{transform:translateY(-1px)}.doc-list{display:grid;gap:10px}.doc{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid #edf0f8;border-radius:15px;background:#fff;transition:.18s;overflow-wrap:anywhere}.doc:hover{border-color:#cad6fb;transform:translateY(-1px)}.pdf-icon{height:43px;width:43px;border-radius:13px;display:grid;place-items:center;background:#fff0f2;color:#dc3545;font-size:21px;flex-shrink:0}.doc-main{min-width:0;flex:1}.doc h3{margin:0 0 4px;font-size:14px}.muted{color:#8390a8;font-size:11px;margin:0}.doc a{display:inline-flex;margin-top:4px;padding:8px 11px;border-radius:9px;background:#edf1ff;text-decoration:none;font-weight:700;font-size:12px}.doc a:hover{background:#e0e7ff}.empty{text-align:center;padding:30px 12px;color:#8590a6}.empty:before{content:"📚";display:block;font-size:32px;margin-bottom:8px}.side-card{background:linear-gradient(145deg,#fff,#fff5fa);border:1px solid #f4dfea;border-radius:18px;padding:18px;margin-bottom:14px}.side-card h3{margin:0 0 7px;font-size:17px}.side-card p{font-size:12px;color:#7a849a;line-height:1.55;margin:0 0 12px}.quick{display:grid;grid-template-columns:1fr 1fr;gap:9px}.quick button{min-height:76px;text-align:left;background:#fff;border:1px solid #e9edf7;padding:12px;border-radius:12px;cursor:pointer;color:#43516e;font-weight:750}.quick button span{display:block;color:var(--pink);font-size:11px;font-weight:500;margin-top:5px}.access-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.access-card h3{margin:0 0 6px}.access-card p{font-size:12px;color:#7a849a}.access-card .btn{width:100%;margin-top:8px}footer{text-align:center;color:#8c96aa;font-size:11px;padding:25px 10px}
+button,input,select,textarea{max-width:100%;font:inherit}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #9db6ff;outline-offset:2px}
+#adminPanel{max-width:1000px!important;margin:18px auto!important;padding:22px!important;background:#fff!important;border:1px solid var(--line)!important;border-radius:20px!important;box-shadow:0 12px 34px #273d7015}#documentForm label{font-weight:700}#documentForm input:not([type=checkbox]):not([type=file]),#documentForm select,#documentForm textarea{width:100%;border:1px solid #d6dcec;border-radius:10px;padding:11px 12px;margin:6px 0 14px}#documentForm textarea{min-height:90px;resize:vertical}#documentForm button,#adminDocumentList button{border:0;font-weight:700}#documentForm button[type=submit]{background:var(--blue);color:white}#adminLogoutBtn{background:#fce7ef;color:#8d2452;margin-left:6px}
+@media(max-width:900px){.content-grid{grid-template-columns:1fr}.intro{grid-template-columns:1fr}.hero-stat{justify-self:start}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.header-nav .nav-label{display:none}}
+@media(max-width:520px){header{padding:14px}.brand h1{font-size:18px}main{padding:14px 10px 30px}.intro{padding:23px 19px}.hero-stat{min-width:0;width:100%}.stats{gap:8px}.stat{padding:12px;gap:9px}.stat strong{font-size:21px}.stat-ico{width:36px;height:36px;font-size:17px}.panel{padding:15px}.toolbar{flex-direction:column}.toolbar input,.toolbar select,#search,#category{width:100%;min-width:0}.doc{align-items:flex-start;flex-wrap:wrap}.doc-main{width:calc(100% - 60px)}.doc a{margin-left:55px}.quick{gap:7px}}
+</style>
 </head>
 <body>
   
 <header>
-  <h1>Rafadya Ivada</h1>
-  <p>Ruang Penyimpanan Dokumen Penilaian Guru</p>
-  <button id="adminLoginBtn" type="button">Login Admin</button>
+  <div class="brand"><div class="brand-logo">📖</div><div><h1>Rafadya Ivada</h1><p>Perpustakaan Dokumen Guru</p></div></div>
+  <nav class="header-nav"><span class="nav-label">⌂ Beranda</span><span class="nav-label">▤ Dokumen</span><span class="nav-label">▦ Kategori</span><button id="adminLoginBtn" class="btn soft" type="button">♙ Login Admin</button></nav>
 </header>
 
 <section id="adminPanel" style="display:none; max-width:900px; margin:24px auto; padding:20px; background:#fff0f6; border:1px solid #f3b6d2; border-radius:12px;">
@@ -189,56 +92,45 @@
 </section>
 
 
-  <main>
-    <section class="intro">
-      <h2>Selamat Datang 👋</h2>
-      <p>Temukan dan unduh dokumen penilaian berdasarkan kelas.</p>
-    </section>
-
+<main>
+  <section class="intro">
+    <div><div class="eyebrow">Satu ruang • Semua dokumen</div><h2>Rafadya Ivada</h2><p><strong>Perpustakaan Dokumen Penilaian untuk Guru</strong><br>Temukan dokumen penilaian, soal, kunci jawaban, dan materi pembelajaran untuk kelas 1, 2, 5, dan 6 dengan mudah dan cepat.</p><div class="hero-actions"><button class="btn soft" type="button" onclick="document.getElementById('archive').scrollIntoView({behavior:'smooth'})">⌕ Jelajahi Dokumen</button><button class="btn pink" type="button" onclick="document.getElementById('adminLoginBtn').click()">♙ Login Admin</button></div></div>
+    <div class="hero-stat"><small>Total dokumen tersimpan</small><strong id="heroCount">0</strong><span>📚 Arsip dokumen guru</span></div>
+  </section>
+  <section class="stats">
+    <div class="stat"><div class="stat-ico">▤</div><div><strong id="countAll">0</strong><span>Total Dokumen</span></div></div>
+    <div class="stat"><div class="stat-ico">▦</div><div><strong id="countCategories">4</strong><span>Kategori Dokumen</span></div></div>
+    <div class="stat"><div class="stat-ico">🎓</div><div><strong>4</strong><span>Kelas Tersedia</span></div></div>
+    <div class="stat"><div class="stat-ico">⬇</div><div><strong id="countPublished">0</strong><span>Dokumen Terbit</span></div></div>
+  </section>
+  <div class="content-grid" id="archive">
     <section class="panel">
-      <h2>Pilih Kelas</h2>
+      <h2>Arsip Dokumen</h2><p class="sub">Cari dan jelajahi dokumen sesuai kebutuhan Anda.</p>
+      <div class="toolbar"><input id="search" type="search" placeholder="⌕ Cari nama dokumen, kata kunci..." aria-label="Cari dokumen"><select id="category" aria-label="Filter kategori"><option value="">Semua kategori</option><option value="Penilaian">Penilaian</option><option value="Soal">Soal</option><option value="Kunci Jawaban">Kunci Jawaban</option><option value="Materi">Materi</option></select></div>
       <div class="classes">
-        <button class="class-btn active" data-class="1">
-          <strong>Kelas 1</strong>Dokumen penilaian SD
-        </button>
-        <button class="class-btn" data-class="2">
-          <strong>Kelas 2</strong>Dokumen penilaian SD
-        </button>
-        <button class="class-btn" data-class="5">
-          <strong>Kelas 5</strong>Dokumen penilaian SD
-        </button>
-        <button class="class-btn" data-class="6">
-          <strong>Kelas 6</strong>Dokumen penilaian SD
-        </button>
+        <button class="class-btn active" data-class="0"><strong>▦ Semua Kelas</strong></button>
+        <button class="class-btn" data-class="1"><strong>♧ Kelas 1</strong></button>
+        <button class="class-btn" data-class="2"><strong>♧ Kelas 2</strong></button>
+        <button class="class-btn" data-class="5"><strong>♧ Kelas 5</strong></button>
+        <button class="class-btn" data-class="6"><strong>♧ Kelas 6</strong></button>
       </div>
-
-      <div class="toolbar">
-        <input id="search" type="search" placeholder="Cari nama dokumen..." aria-label="Cari dokumen">
-        <select id="category" aria-label="Filter kategori">
-          <option value="">Semua kategori</option>
-          <option value="Penilaian">Penilaian</option>
-          <option value="Soal">Soal</option>
-          <option value="Kunci Jawaban">Kunci Jawaban</option>
-          <option value="Materi">Materi</option>
-        </select>
-      </div>
-
-      <div id="documents" class="empty">
-        Dokumen akan ditampilkan setelah database dihubungkan.
-      </div>
+      <h3 style="font-size:16px;margin:18px 0 8px">Daftar Dokumen</h3>
+      <div id="documents" class="empty">Memuat dokumen dari arsip online...</div>
     </section>
-
-    <footer>
-      © <span id="year"></span> Rafadya Ivada · Ruang Penilaian SD
-    </footer>
-  </main>
+    <aside>
+      <div class="side-card"><h3>🎓 Pintasan Kelas</h3><p>Pilih kelas untuk melihat dokumen sesuai kebutuhan.</p><div class="quick"><button type="button" onclick="selectClass(1)">🌸 Kelas 1<span>Lihat dokumen →</span></button><button type="button" onclick="selectClass(2)">🌿 Kelas 2<span>Lihat dokumen →</span></button><button type="button" onclick="selectClass(5)">💙 Kelas 5<span>Lihat dokumen →</span></button><button type="button" onclick="selectClass(6)">💜 Kelas 6<span>Lihat dokumen →</span></button></div></div>
+      <div class="access-card"><h3>🔒 Akses Admin</h3><p>Kelola dokumen, upload PDF, edit, hapus, dan pengaturan password.</p><button class="btn pink" type="button" onclick="document.getElementById('adminLoginBtn').click()">♙ Login Admin　→</button></div>
+    </aside>
+  </div>
+  <footer>© <span id="year"></span> Rafadya Ivada · Perpustakaan Dokumen Guru. Dibuat dengan ♥ untuk pendidikan.</footer>
+</main>
 
  
 <script>
   const SUPABASE_URL = "https://eoxdlmgkcomiidqzmuun.supabase.co";
   const SUPABASE_KEY = "sb_publishable_pVDPxtef45VNU7IevwFGQA_v04dS9Qa";
 
-  let selectedClass = 1;
+  let selectedClass = 0;
   let allDocuments = [];
 
   document.getElementById("year").textContent =
@@ -281,6 +173,9 @@
 
       allDocuments = await response.json();
       renderDocuments();
+      document.getElementById("heroCount").textContent = allDocuments.length;
+      document.getElementById("countAll").textContent = allDocuments.length;
+      document.getElementById("countPublished").textContent = allDocuments.length;
     } catch (error) {
       container.textContent =
         "Dokumen belum dapat dimuat. Periksa konfigurasi database dan izin akses Supabase.";
@@ -294,7 +189,7 @@
     const category = document.getElementById("category").value;
 
     const filtered = allDocuments.filter(doc =>
-      Number(doc.class_level) === selectedClass &&
+      (selectedClass === 0 || Number(doc.class_level) === selectedClass) &&
       (!search || (doc.title || "").toLowerCase().includes(search)) &&
       (!category || doc.category === category)
     );
@@ -303,15 +198,22 @@
 
     if (filtered.length === 0) {
       container.className = "empty";
-      container.textContent = "Belum ada dokumen untuk kelas ini.";
+      container.textContent = "Belum ada dokumen untuk pilihan kelas dan kategori ini.";
       return;
     }
 
-    container.className = "";
+    container.className = "doc-list";
 
     filtered.forEach(doc => {
       const card = document.createElement("article");
       card.className = "doc";
+
+      const icon = document.createElement("div");
+      icon.className = "pdf-icon";
+      icon.textContent = "📕";
+
+      const content = document.createElement("div");
+      content.className = "doc-main";
 
       const title = document.createElement("h3");
       title.textContent = doc.title;
@@ -321,12 +223,12 @@
       info.textContent =
         "Kelas " + doc.class_level + " · " + (doc.category || "Penilaian");
 
-      card.append(title, info);
+      content.append(title, info);
 
       if (doc.description) {
         const desc = document.createElement("p");
         desc.textContent = doc.description;
-        card.append(desc);
+        content.append(desc);
       }
 
       const link = document.createElement("a");
@@ -336,13 +238,14 @@
         doc.file_path.split("/").map(encodeURIComponent).join("/");
       link.target = "_blank";
       link.rel = "noopener noreferrer";
-      link.textContent = "Lihat / Unduh Dokumen";
-      card.append(link);
+      link.textContent = "↓ Lihat / Unduh";
+      card.append(icon, content, link);
 
       container.append(card);
     });
   }
 
+  function selectClass(value){selectedClass=Number(value);document.querySelectorAll(".class-btn").forEach(btn=>btn.classList.toggle("active",Number(btn.dataset.class)===selectedClass));renderDocuments();document.getElementById("archive").scrollIntoView({behavior:"smooth",block:"start"});}
   loadDocuments();
 </script>
 
