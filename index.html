@@ -466,7 +466,13 @@ deleteBtn.type = "button";
 deleteBtn.style.cssText =
   "background:#dc3545;color:white;padding:8px 12px;border:0;border-radius:6px;cursor:pointer;";
 
-item.append(title, detail, status, deleteBtn);
+const editBtn = document.createElement("button");
+editBtn.textContent = "Edit";
+editBtn.type = "button";
+editBtn.style.cssText =
+  "background:#0d6efd;color:white;padding:8px 12px;border:0;border-radius:6px;margin-right:8px;cursor:pointer;";
+
+item.append(title, detail, status, editBtn, deleteBtn);
       deleteBtn.addEventListener("click", async () => {
   const yakin = confirm(
     'Yakin ingin menghapus dokumen "' + doc.title + '"?'
