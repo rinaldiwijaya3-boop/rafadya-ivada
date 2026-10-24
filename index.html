@@ -505,14 +505,22 @@ editBtn.addEventListener("click", async () => {
     return;
   }
 
-  const { error } = await supabaseClient
-    .from("documents")
-    .update({
-      title: newTitle.trim(),
-      class_level: Number(newClass),
-      category: newCategory.trim()
-    })
-    .eq("id", doc.id);
+const newDescription = prompt(
+  "Keterangan dokumen:",
+  doc.description || ""
+);
+
+if (newDescription === null) return;
+
+const { error } = await supabaseClient
+  .from("documents")
+  .update({
+    title: newTitle.trim(),
+    class_level: Number(newClass),
+    category: newCategory.trim(),
+    description: newDescription.trim() || null
+  })
+  .eq("id", doc.id);
 
   if (error) {
     console.error(error);
